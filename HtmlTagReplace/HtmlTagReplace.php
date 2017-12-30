@@ -122,27 +122,7 @@ class HtmlTagReplace
         if (isset($matches[1])) {
             $arguments = preg_split('/ (?=\w+=)/', $matches[1]);
 
-            foreach ($arguments as $key => $argument) {
-                $pair = explode('=', $argument);
-                if (isset($argumentsReplace[trim($pair[0])])) {
-                    $newTag = $argumentsReplace[trim($pair[0])];
-                    if (!is_array($newTag)) {
-                        if ($newTag === false) {
-                            unset($arguments[$key]);
-                            continue;
-                        }
-                        $pair[0] = $newTag;
-                        $arguments[$key] = join('=', $pair);
-                    } else {
-                        $clones = [];
-                        foreach ($newTag as $clone) {
-                            $pair[0] = $clone;
-                            $clones[] = join('=', $pair);
-                        }
-                        $arguments[$key] = join(' ', $clones);
-                    }
-                }
-            }
+            $arguments = $this->resetArguments($arguments, $argumentsReplace);
 
             if (is_array($arguments)) {
                 $matches[1] = join(' ', $arguments);
@@ -150,6 +130,41 @@ class HtmlTagReplace
         }
 
         return vsprintf($replacement, $matches);
+    }
+
+    /**
+     * @param array $arguments
+     * @param array $argumentsReplace
+     * @return array
+     */
+    private function resetArguments($arguments, $argumentsReplace)
+    {
+        foreach ($arguments as $key => $argument) {
+            $pair = explode('=', $argument);
+
+            if (!isset($argumentsReplace[trim($pair[0])])) {
+                continue;
+            }
+            
+            $newTag = $argumentsReplace[trim($pair[0])];
+            if (!is_array($newTag)) {
+                if ($newTag === false) {
+                    unset($arguments[$key]);
+                    continue;
+                }
+                $pair[0] = $newTag;
+                $arguments[$key] = join('=', $pair);
+            } else {
+                $clones = [];
+                foreach ($newTag as $clone) {
+                    $pair[0] = $clone;
+                    $clones[] = join('=', $pair);
+                }
+                $arguments[$key] = join(' ', $clones);
+            }
+        }
+
+        return $arguments;
     }
 
     /**
