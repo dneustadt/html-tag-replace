@@ -12,5 +12,8 @@
     "psr-4": {
       "HtmlTagReplace\\": "HtmlTagReplace"
     }
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
