@@ -1,0 +1,16 @@
+{
+  "name": "dneustadt/html-tag-replace",
+  "version": "1.0.0",
+  "keywords": ["dom", "replace", "tags", "attributes", "markup"],
+  "description": "Replace and enhance markup tags and/or attributes",
+  "homepage": "https://davidneustadt.de",
+  "license": "MIT",
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "HtmlTagReplace\\": "HtmlTagReplace"
+    }
+  }
+}
