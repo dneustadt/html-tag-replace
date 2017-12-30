@@ -122,9 +122,9 @@ class HtmlTagReplace
         if (isset($matches[1])) {
             $arguments = preg_split('/ (?=\w+=)/', $matches[1]);
 
-            $arguments = $this->resetArguments($arguments, $argumentsReplace);
-
             if (is_array($arguments)) {
+                $arguments = $this->resetArguments($arguments, $argumentsReplace);
+
                 $matches[1] = join(' ', $arguments);
             }
         }
@@ -145,7 +145,7 @@ class HtmlTagReplace
             if (!isset($argumentsReplace[trim($pair[0])])) {
                 continue;
             }
-            
+
             $newTag = $argumentsReplace[trim($pair[0])];
             if (!is_array($newTag)) {
                 if ($newTag === false) {
