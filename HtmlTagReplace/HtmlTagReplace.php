@@ -58,8 +58,9 @@ class HtmlTagReplace
         $prepend = ''
     )
     {
+        $arguments      = !empty($arguments) ? ' ' . $arguments : '';
         $pattern        = '/<' . $search . '(.*?)>';
-        $replacement    = '<' . $replace . ' ' . $arguments . '$1>';
+        $replacement    = '<' . $replace . $arguments . '$1>';
 
         if ($closingTag) {
             $pattern        .= '(.*?)<\/' . $search . '>';
