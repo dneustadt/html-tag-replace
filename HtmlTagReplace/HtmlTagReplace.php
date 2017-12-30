@@ -81,7 +81,7 @@ class HtmlTagReplace
             $this->setMarkup(
                 preg_replace_callback(
                     $pattern,
-                    function ($matches) use ($replacement, $argumentsReplace) {
+                    function($matches) use ($replacement, $argumentsReplace) {
                         return $this->replaceArguments(
                             $matches,
                             $replacement,
@@ -143,7 +143,9 @@ class HtmlTagReplace
                 }
             }
 
-            $matches[1] = join(' ', $arguments);
+            if (is_array($arguments)) {
+                $matches[1] = join(' ', $arguments);
+            }
         }
 
         return vsprintf($replacement, $matches);
@@ -156,8 +158,8 @@ class HtmlTagReplace
     {
         $this->setMarkup(
             preg_replace(
-                ['/\n/','/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s'],
-                [' ','>','<','\\1'],
+                ['/\n/', '/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'],
+                [' ', '>', '<', '\\1'],
                 $this->getMarkup()
             )
         );
