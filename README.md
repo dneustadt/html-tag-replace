@@ -1,4 +1,7 @@
-# HtmlTagReplace
+HtmlTagReplace
+=====
+[![Scrutinizer](https://scrutinizer-ci.com/g/dneustadt/html-tag-replace/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dneustadt/html-tag-replace/?branch=master)
+[![Travis CI](https://travis-ci.org/dneustadt/html-tag-replace.svg?branch=master)](https://travis-ci.org/dneustadt/html-tag-replace)
 
 a helper to replace and enhance html tags and their attributes.
 
